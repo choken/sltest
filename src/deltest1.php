@@ -19,6 +19,7 @@
 
 		<script src="js/jquery-2.0.2.min.js"></script>
 		<script type="text/javascript">
+
 			$.fn.tempMaster = function(pathToTemplateMain) {
 				pathToTemplates = pathToTemplateMain.substring(0, url.lastIndexOf("/") + 1);
 				

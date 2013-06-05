@@ -19,7 +19,10 @@
 
 		<script src="js/jquery-2.0.2.min.js"></script>
 		<script type="text/javascript">
-			$.fn.tempMaster = function(pathToTemplateMain) {
+			var myVarData = {"greeting": "Välkommen!", "extraAnimal1": "Elefanter", "extraAnimal2": "Krokodiler"};
+		
+		
+			$.fn.tempMaster = function(pathToTemplateMain, vardata) {
 				pathToTemplates = pathToTemplateMain.substring(0, url.lastIndexOf("/") + 1);
 				
 				$.get(pathToTemplates + '/' + filepath, function(data) {
@@ -27,12 +30,12 @@
 				});
 
 				// Lets chain
-				return this._tempMaster(pathToTemplates);
+				return this._tempMaster(pathToTemplates, vardata);
 
 				});
 
 
-			$.fn._tempMaster = function(pathToTemplates) {
+			$.fn._tempMaster = function(pathToTemplates, vardata) {
 				// Iterate
 				return this.each(function() {
 					// Iterate through all text nodes.
