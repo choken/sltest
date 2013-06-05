@@ -53,6 +53,7 @@
 								});
 							} else {
 								//Todo: Deltest2
+								// make a this.repace("\\{([\\w\\/\\.]+)\\}", vardata[matches[1].trim])
 							}
 
 						}
