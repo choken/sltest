@@ -19,8 +19,20 @@
 
 		<script src="js/jquery-2.0.2.min.js"></script>
 		<script type="text/javascript">
-			$.fn.tempMaster = function(pathToTemplates) {
+			$.fn.tempMaster = function(pathToTemplateMain) {
+				pathToTemplates = pathToTemplateMain.substring(0, url.lastIndexOf("/") + 1);
+				
+				$.get(pathToTemplates + '/' + filepath, function(data) {
+					this.html(data);
+				});
 
+				// Lets chain
+				return this._tempMaster(pathToTemplates);
+
+				});
+
+
+			$.fn._tempMaster = function(pathToTemplates) {
 				// Iterate
 				return this.each(function() {
 					// Iterate through all text nodes.
@@ -33,7 +45,7 @@
 						if (matches) {
 							if (matches.length > 2 && matches[1].trim === "include") {
 								filepath = matches[2];
-								$.get(pathToTemplates+'/'+filepath, function(data) {
+								$.get(pathToTemplates + '/' + filepath, function(data) {
 									this.html(data);
 								});
 							} else {
@@ -42,18 +54,20 @@
 
 						}
 					});
-					
+
 					// Do it recursive in dom
 					this.children().each(function() {
-					  this.tempMaster(pathToTemplates);
+						this.tempMaster(pathToTemplates);
 					})
-					
 					// Lets chain
 					return this;
 
 				});
-				;
 			}
+
+			$(document).ready(function() {
+				$("content").tempMaster("templates/main.html");
+			});
 		</script>
 	</head>
 
@@ -71,7 +85,7 @@
 				</p>
 			</nav>
 
-			<div>
+			<div id="content">
 
 			</div>
 
